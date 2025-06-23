@@ -55,12 +55,6 @@ jobs:
                 zip -r Cosmic.Frontiers.Server.${{ github.event.inputs.version }}.zip Cosmic.Frontiers.Server.${{ github.event.inputs.version }}/
                 zip -r Cosmic.Frontiers.${{ github.event.inputs.version }}.zip manifest.json modlist.html overrides
             
-            - name: Action test
-              uses: henkelmax/build-modpack-server-action@v1.0.0
-              with:
-                modpack-path: ./Cosmic.Frontiers.${{ github.event.inputs.version }}.zip
-                output-path: ./Cosmic.Frontiers.GeneratedServer.${{ github.event.inputs.version }}.zip
-            
             - name: Upload build artifacts
               uses: actions/upload-artifact@v4
               with:
