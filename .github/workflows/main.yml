@@ -1,21 +1,17 @@
 name: Release
 
 on:
-    push:
-      branches:
-        - mrquentin-patch-1
-    workflow_dispatch:
-      inputs:
-        version:
-          description: 'The version number of the release'
-          default: '0.0.0'
-          required: true
-          type: string  
-        version_type:
-          description: 'The type of version to release (alpha | beta | release)'
-          default: 'beta'
-          required: true
-          type: string
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version number of the release'
+        required: true
+        type: string  
+      version_type:
+        description: 'The type of version to release (alpha | beta | release)'
+        default: 'beta'
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -52,13 +48,13 @@ jobs:
 
             - name: Prepare client and server zip
               run: |
-                zip -r Cosmic.Frontiers.Server.${{ github.event.inputs.version }}.zip Cosmic.Frontiers.Server.${{ github.event.inputs.version }}/
                 zip -r Cosmic.Frontiers.${{ github.event.inputs.version }}.zip manifest.json modlist.html overrides
+                cd Cosmic.Frontiers.Server.${{ github.event.inputs.version }}/
+                zip -r ../Cosmic.Frontiers.Server.${{ github.event.inputs.version }}.zip .
             
             - name: Upload build artifacts
               uses: actions/upload-artifact@v4
               with:
                 path: |
-                  Cosmic.Frontiers.GeneratedServer.${{ github.event.inputs.version }}.zip
                   Cosmic.Frontiers.Server.${{ github.event.inputs.version }}.zip
                   Cosmic.Frontiers.${{ github.event.inputs.version }}.zip
