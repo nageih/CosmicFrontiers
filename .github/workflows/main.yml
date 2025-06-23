@@ -1,0 +1,30 @@
+# This is the name of your workflow, which will appear in the GitHub Actions tab.
+name: Hello World Workflow
+
+# This defines when the workflow should run.
+# In this case, it runs on every push to the 'main' branch.
+on:
+  push:
+    branches:
+      - main
+
+# A workflow is made up of one or more jobs.
+jobs:
+  # This is the ID of your job (you can name it anything descriptive).
+  my-hello-job:
+    # The type of runner that the job will run on.
+    # 'ubuntu-latest' is a common choice for Linux-based environments.
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job.
+    steps:
+      # Step 1: Checkout the repository code.
+      # This action brings your repository's code onto the runner,
+      # allowing subsequent steps to access your files.
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Run a simple shell command.
+      # The 'run' keyword executes commands in the shell of the runner.
+      - name: Print Hello Message
+        run: echo "Hello, GitHub Actions!"
