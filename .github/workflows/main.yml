@@ -7,7 +7,7 @@ on:
   push:
     # Specifically for the 'test' branch
     branches:
-      - test
+      - mrquentin-patch-1
 
   # Trigger manually from the GitHub Actions tab
   workflow_dispatch:
